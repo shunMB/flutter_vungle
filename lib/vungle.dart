@@ -104,9 +104,14 @@ class Vungle {
   ///   }
   /// }
   /// ```
-  static void playAd(String placementId) {
+  static void playAd(String placementId, {String userId, String title, String body, String keepWatching, String close}) {
     _channel.invokeMethod('playAd', <String, dynamic>{
       'placementId': placementId,
+      'userId': userId,
+      'title': title,
+      'body': body,
+      'keepWatching': keepWatching,
+      'close': close,
     });
   }
 
