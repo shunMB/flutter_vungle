@@ -56,9 +56,20 @@
 - (void)callPlayAd:(FlutterMethodCall*)call result:(FlutterResult)result {
     NSString *placementId = [self getAndValidatePlacementId:call result:result];
     if(placementId != nil) {
+        NSString *userId = call.arguments[@"userId"];
+        NSString *title = call.arguments[@"title"];
+        NSString *body = call.arguments[@"body"];
+        NSString *keepWatching = call.arguments[@"keepWatching"];
+        NSString *close = call.arguments[@"close"];
+        NSDictionary *options = @{VunglePlayAdOptionKeyOrientations: @(UIInterfaceOrientationMaskAll),
+                                  VunglePlayAdOptionKeyUser: userId,
+                                  VunglePlayAdOptionKeyIncentivizedAlertBodyText : body,
+                                  VunglePlayAdOptionKeyIncentivizedAlertCloseButtonText : close,
+                                  VunglePlayAdOptionKeyIncentivizedAlertContinueButtonText : keepWatching,
+                                  VunglePlayAdOptionKeyIncentivizedAlertTitleText : title};
         NSError *error = nil;
         UIViewController *rootVC = [UIApplication sharedApplication].delegate.window.rootViewController;
-        [_sdk playAd:rootVC options:nil placementID:placementId error:&error];
+        [_sdk playAd:rootVC options:options placementID:placementId error:&error];
     }
     result([NSNumber numberWithBool:YES]);
 }

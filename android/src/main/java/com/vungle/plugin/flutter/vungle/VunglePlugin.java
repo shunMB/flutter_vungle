@@ -122,7 +122,13 @@ public class VunglePlugin implements MethodCallHandler {
     if(placementId == null) {
       return;
     }
+    final String userId = call.argument("userId");
+    final String title = call.argument("title");
+    final String body = call.argument("body");
+    final String keepWatching = call.argument("keepWatching");
+    final String close = call.argument("close");
 
+    Vungle.setIncentivizedFields(userId,title,body,keepWatching,close);
     Vungle.playAd(placementId, new AdConfig(), new PlayAdCallback() {
       @Override
       public void onAdStart(String s) {
@@ -134,7 +140,7 @@ public class VunglePlugin implements MethodCallHandler {
       public void onAdEnd(String s, boolean b, boolean b1) {
         Log.d(TAG, "Vungle ad finished, " + b + ", " + b1);
         channel.invokeMethod("onAdFinished",
-                argumentsMap("placementId", s, "isCTAClicked", b, "isCompletedView", b1));
+                argumentsMap("placementId", s, "isCTAClicked", b1, "isCompletedView", b));
       }
 
       @Override
