@@ -34,7 +34,7 @@ android {
 
 dependencies {  
   // Vungle SDK
-  implementation 'com.vungle:publisher-sdk-android:6.4.11'
+  implementation 'com.vungle:publisher-sdk-android:6.7.0'
 
   // Either appcompat-v7 or support-v4 is need for SDK operation 
   implementation 'com.android.support:appcompat-v7:28.0.0'  // Either
