@@ -144,8 +144,8 @@ public class VunglePlugin implements MethodCallHandler {
       }
 
       @Override
-      public void onError(String s, VungleException e) {
-        Log.e(TAG, "Vungle ad play failed, " + s + ", ", e);
+      public void onError(String s, Throwable throwable) {
+        Log.e(TAG, "Vungle ad play failed, " + s + ", ", throwable);
       }
     });
     result.success(Boolean.TRUE);
