@@ -75,13 +75,11 @@ public class VunglePlugin implements MethodCallHandler {
       return;
     }
     Vungle.init(appId, registrar.context(), new InitCallback() {
-      @Override
       public void onSuccess() {
         Log.d(TAG, "Vungle SDK init success");
         channel.invokeMethod("onInitialize", argumentsMap());
       }
 
-      @Override
       public void onError(Throwable throwable) {
         Log.e(TAG, "Vungle SDK init failed, ", throwable);
       }
@@ -101,13 +99,11 @@ public class VunglePlugin implements MethodCallHandler {
     }
 
     Vungle.loadAd(placementId, new LoadAdCallback() {
-      @Override
       public void onAdLoad(String s) {
         Log.d(TAG, "Vungle ad loaded, " + s);
         channel.invokeMethod("onAdPlayable", argumentsMap("placementId", s, "playable", Boolean.TRUE));
       }
 
-      @Override
       public void onError(String s, Throwable throwable) {
         Log.e(TAG, "Vungle ad load failed, " + s + ", ", throwable);
         channel.invokeMethod("onAdPlayable", argumentsMap("placementId", s, "playable", Boolean.FALSE));
@@ -130,7 +126,6 @@ public class VunglePlugin implements MethodCallHandler {
 
     Vungle.setIncentivizedFields(userId,title,body,keepWatching,close);
     Vungle.playAd(placementId, new AdConfig(), new PlayAdCallback() {
-      @Override
       public void onAdStart(String s) {
         Log.d(TAG, "Vungle ad started, " + s);
         channel.invokeMethod("onAdStarted", argumentsMap("placementId", s));
@@ -143,7 +138,6 @@ public class VunglePlugin implements MethodCallHandler {
                 argumentsMap("placementId", s, "isCTAClicked", b1, "isCompletedView", b));
       }
 
-      @Override
       public void onError(String s, Throwable throwable) {
         Log.e(TAG, "Vungle ad play failed, " + s + ", ", throwable);
       }
