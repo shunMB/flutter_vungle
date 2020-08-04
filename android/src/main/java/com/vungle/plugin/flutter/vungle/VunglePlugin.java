@@ -150,7 +150,7 @@ public class VunglePlugin implements MethodCallHandler {
       @Override
       public void onAdRewarded(String placementReferenceID) {
         channel.invokeMethod("onAdFinished",
-                argumentsMap("placementId", placementReferenceID, "isCompletedView", true));      }
+                argumentsMap("placementId", placementReferenceID, "isCTAClicked", false, "isCompletedView", true));      }
 
       @Override
       public void onAdLeftApplication(String placementReferenceID) {
