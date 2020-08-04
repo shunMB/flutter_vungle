@@ -137,7 +137,6 @@ public class VunglePlugin implements MethodCallHandler {
         channel.invokeMethod("onAdStarted", argumentsMap("placementId", placementReferenceID));
       }
 
-      @Override
       public void onAdEnd(String placementReferenceID) {
         Log.d(TAG, "Vungle ad end, " + placementReferenceID);
       }
