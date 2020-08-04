@@ -8,7 +8,7 @@ import com.vungle.warren.InitCallback;
 import com.vungle.warren.LoadAdCallback;
 import com.vungle.warren.PlayAdCallback;
 import com.vungle.warren.Vungle;
-import com.vungle.warren.VungleException;
+import com.vungle.warren.error.VungleException;
 
 import org.w3c.dom.Text;
 
