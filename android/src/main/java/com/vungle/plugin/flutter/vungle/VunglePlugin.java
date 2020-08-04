@@ -109,7 +109,7 @@ public class VunglePlugin implements MethodCallHandler {
       }
 
       @Override
-      public void onError(final String placementReferenceId, VungleException exception) {
+      public void onError(String placementReferenceId, VungleException exception) {
         Log.e(TAG, "Vungle ad load failed, " + placementReferenceId + ", ", exception);
         channel.invokeMethod("onAdPlayable", argumentsMap("placementId", placementReferenceId, "playable", Boolean.FALSE));
       }
@@ -132,35 +132,33 @@ public class VunglePlugin implements MethodCallHandler {
     Vungle.setIncentivizedFields(userId,title,body,keepWatching,close);
     Vungle.playAd(placementId, new AdConfig(), new PlayAdCallback() {
       @Override
-      public void onAdStart(String s) {
-        Log.d(TAG, "Vungle ad started, " + s);
-        channel.invokeMethod("onAdStarted", argumentsMap("placementId", s));
+      public void onAdStart(String placementReferenceID) {
+        Log.d(TAG, "Vungle ad started, " + placementReferenceID);
+        channel.invokeMethod("onAdStarted", argumentsMap("placementId", placementReferenceID));
       }
 
       @Override
-      public void onAdEnd(String s, boolean b, boolean b1) {
-        Log.d(TAG, "Vungle ad finished, " + b + ", " + b1);
+      public void onAdEnd(String placementReferenceID) {
+        Log.d(TAG, "Vungle ad finished, " + placementReferenceID);
+      }
+
+      @Override
+      public void onAdClick(String placementReferenceID) {
+         Log.d(TAG, "Vungle ad clicked, " + placementReferenceID);
+      }
+
+      @Override
+      public void onAdRewarded(String placementReferenceID) {
         channel.invokeMethod("onAdFinished",
-                argumentsMap("placementId", s, "isCTAClicked", b1, "isCompletedView", b));
+                argumentsMap("placementId", placementReferenceID, "isCompletedView", true));      }
+
+      @Override
+      public void onAdLeftApplication(String placementReferenceID) {
+        Log.e(TAG, "Vungle user left application, " + placementReferenceID);
       }
 
       @Override
-      public void onAdClick(String id) {
-        // User clicked on ad
-      }
-
-      @Override
-      public void onAdRewarded(String id) {
-        // User earned reward for watching an ad
-      }
-
-      @Override
-      public void onAdLeftApplication(String s) {
-        Log.e(TAG, "Vungle ad play failed, " + s);
-      }
-
-      @Override
-      public void onError(final String placementReferenceId, VungleException exception) {
+      public void onError(String placementReferenceId, VungleException exception) {
         Log.e(TAG, "Vungle ad play failed, " + placementReferenceId + ", ", exception);
       }
     });
