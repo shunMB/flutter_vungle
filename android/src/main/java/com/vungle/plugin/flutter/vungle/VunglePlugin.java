@@ -82,8 +82,8 @@ public class VunglePlugin implements MethodCallHandler {
       }
 
       @Override
-      public void onError(Throwable throwable) {
-        Log.e(TAG, "Vungle SDK init failed, ", throwable);
+      public void onError(VungleException exception) {
+        Log.e(TAG, "Vungle SDK init failed, ", exception);
       }
 
       @Override
@@ -108,9 +108,9 @@ public class VunglePlugin implements MethodCallHandler {
       }
 
       @Override
-      public void onError(String s, Throwable throwable) {
-        Log.e(TAG, "Vungle ad load failed, " + s + ", ", throwable);
-        channel.invokeMethod("onAdPlayable", argumentsMap("placementId", s, "playable", Boolean.FALSE));
+      public void onError(final String placementReferenceId, VungleException exception) {
+        Log.e(TAG, "Vungle ad load failed, " + placementReferenceId + ", ", exception);
+        channel.invokeMethod("onAdPlayable", argumentsMap("placementId", placementReferenceId, "playable", Boolean.FALSE));
       }
     });
 
@@ -144,8 +144,8 @@ public class VunglePlugin implements MethodCallHandler {
       }
 
       @Override
-      public void onError(String s, Throwable throwable) {
-        Log.e(TAG, "Vungle ad play failed, " + s + ", ", throwable);
+      public void onError(final String placementReferenceId, VungleException exception) {
+        Log.e(TAG, "Vungle ad play failed, " + placementReferenceId + ", ", exception);
       }
     });
     result.success(Boolean.TRUE);
