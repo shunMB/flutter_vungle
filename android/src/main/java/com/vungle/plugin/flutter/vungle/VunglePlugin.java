@@ -138,11 +138,6 @@ public class VunglePlugin implements MethodCallHandler {
       }
 
       @Override
-      public void onAdEnd(String placementReferenceID) {
-        Log.d(TAG, "Vungle ad finished, " + placementReferenceID);
-      }
-
-      @Override
       public void onAdClick(String placementReferenceID) {
          Log.d(TAG, "Vungle ad clicked, " + placementReferenceID);
       }
