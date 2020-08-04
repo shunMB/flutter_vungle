@@ -8,6 +8,7 @@ import com.vungle.warren.InitCallback;
 import com.vungle.warren.LoadAdCallback;
 import com.vungle.warren.PlayAdCallback;
 import com.vungle.warren.Vungle;
+import com.vungle.warren.VungleException;
 
 import org.w3c.dom.Text;
 
@@ -141,6 +142,16 @@ public class VunglePlugin implements MethodCallHandler {
         Log.d(TAG, "Vungle ad finished, " + b + ", " + b1);
         channel.invokeMethod("onAdFinished",
                 argumentsMap("placementId", s, "isCTAClicked", b1, "isCompletedView", b));
+      }
+
+      @Override
+      public void onAdClick(String id) {
+        // User clicked on ad
+      }
+
+      @Override
+      public void onAdRewarded(String id) {
+        // User earned reward for watching an ad
       }
 
       @Override
