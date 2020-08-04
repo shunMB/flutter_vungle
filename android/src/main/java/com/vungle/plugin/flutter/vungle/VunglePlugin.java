@@ -137,6 +137,14 @@ public class VunglePlugin implements MethodCallHandler {
         channel.invokeMethod("onAdStarted", argumentsMap("placementId", placementReferenceID));
       }
 
+      // Deprecated
+      @Override
+      public void onAdEnd(String s, boolean b, boolean b1) {
+        Log.d(TAG, "Vungle ad finished, " + b + ", " + b1);
+        channel.invokeMethod("onAdFinished",
+                argumentsMap("placementId", s, "isCTAClicked", b1, "isCompletedView", b));      
+
+      @Override
       public void onAdEnd(String placementReferenceID) {
         Log.d(TAG, "Vungle ad end, " + placementReferenceID);
       }
