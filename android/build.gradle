@@ -45,6 +45,6 @@ dependencies {
   implementation 'com.android.support:support-v4:27.1.1'    // Or
 
   // Recommended for SDK to be able to get Android Advertising ID
-  implementation 'com.google.android.gms:play-services-basement:17.3.0'
+  implementation 'com.google.android.gms:play-services-basement:17.0.0'
   implementation 'com.google.android.gms:play-services-ads-identifier:17.0.0'
 }
